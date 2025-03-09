@@ -1,1 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Kelinci Framework</title>
+    <style>
+        /* Kelinci Framework CSS */
+        :root {
+            --kelinci-primary-color: #007bff;
+            --kelinci-secondary-color: #6c757d;
+            --kelinci-font-family: 'Arial', sans-serif;
+            --kelinci-spacing: 10px;
+        }
+        body {
+            font-family: var(--kelinci-font-family);
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .kelinci-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: calc(-1 * var(--kelinci-spacing));
+        }
+        .kelinci-col {
+            padding: var(--kelinci-spacing);
+            flex: 1;
+        }
+        .kelinci-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--kelinci-primary-color);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .kelinci-button:hover {
+            background-color: #0056b3;
+        }
+        .kelinci-card {
+            border: 1px solid var(--kelinci-secondary-color);
+            padding: var(--kelinci-spacing);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+        .kelinci-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        .kelinci-modal.show {
+            display: block;
+        }
+        .kelinci-copy-btn {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--kelinci-primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 3px;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .kelinci-copy-btn:hover {
+            background-color: #0056b3;
+        }
+        .kelinci-pre-container {
+            position: relative;
+        }
+        .kelinci-pre-container pre {
+            padding: 10px;
+            background: #f4f4f4;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
 
+    <h1>Kelinci Framework</h1>
+    <p>Framework UI modern berbasis <strong>SASS</strong> dan <strong>jQuery</strong>.</p>
+
+    <h2>1. Grid System</h2>
+    <p>Gunakan class <code>.kelinci-row</code> dan <code>.kelinci-col</code> untuk layout grid.</p>
+    <div class="kelinci-card">
+        <div class="kelinci-row">
+            <div class="kelinci-col" style="background: lightgray;">Kolom 1</div>
+            <div class="kelinci-col" style="background: lightblue;">Kolom 2</div>
+        </div>
+    </div>
+    <div class="kelinci-pre-container">
+        <button class="kelinci-copy-btn">Salin Kode</button>
+        <pre>
+&lt;div class="kelinci-row"&gt;
+    &lt;div class="kelinci-col"&gt;Kolom 1&lt;/div&gt;
+    &lt;div class="kelinci-col"&gt;Kolom 2&lt;/div&gt;
+&lt;/div&gt;
+        </pre>
+    </div>
+
+    <h2>2. JavaScript Kelinci</h2>
+    <p>Contoh script jQuery untuk modal.</p>
+    <div class="kelinci-pre-container">
+        <button class="kelinci-copy-btn">Salin Kode</button>
+        <pre>
+$(document).ready(function() {
+    $(".kelinci-open-modal").on("click", function() {
+        let target = $(this).data("target");
+        $(target).addClass("show");
+    });
+
+    $(".kelinci-close-modal").on("click", function() {
+        $(this).closest(".kelinci-modal").removeClass("show");
+    });
+});
+        </pre>
+    </div>
+
+    <h2>3. Tombol</h2>
+    <p>Gunakan class <code>.kelinci-button</code> untuk tombol.</p>
+    <button class="kelinci-button">Tombol Kelinci</button>
+
+    <h2>4. Modal</h2>
+    <p>Gunakan class <code>.kelinci-modal</code> untuk modal.</p>
+    <button class="kelinci-open-modal" data-target="#demoModal">Buka Modal</button>
+    <div id="demoModal" class="kelinci-modal">
+        <p>Ini adalah modal Kelinci!</p>
+        <button class="kelinci-close-modal">Tutup</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            console.log("Kelinci framework loaded!");
+
+            // Fungsi untuk menyalin kode dari <pre>, hanya untuk kode <div> dan JavaScript
+            $(".kelinci-copy-btn").on("click", function() {
+                let codeBlock = $(this).next("pre").text().trim();
+
+                // Pastikan hanya kode yang mengandung <div> atau JavaScript yang bisa disalin
+                if (codeBlock.startsWith("<div") || codeBlock.includes("$(document).ready")) {
+                    let tempInput = $("<textarea>");
+                    $("body").append(tempInput);
+                    tempInput.val(codeBlock).select();
+                    document.execCommand("copy");
+                    tempInput.remove();
+                    
+                    // Ubah teks tombol sebentar
+                    let btn = $(this);
+                    btn.text("Disalin!");
+                    setTimeout(() => btn.text("Salin Kode"), 1500);
+                } else {
+                    alert("Hanya kode <div> atau JavaScript yang bisa disalin.");
+                }
+            });
+
+            // Tombol interaktif
+            $(".kelinci-button").on("click", function() {
+                alert("Tombol Kelinci diklik!");
+            });
+
+            // Modal
+            $(".kelinci-open-modal").on("click", function() {
+                let target = $(this).data("target");
+                $(target).addClass("show");
+            });
+
+            $(".kelinci-close-modal").on("click", function() {
+                $(this).closest(".kelinci-modal").removeClass("show");
+            });
+
+            $(document).on("click", function(event) {
+                if (!$(event.target).closest(".kelinci-modal, .kelinci-open-modal").length) {
+                    $(".kelinci-modal").removeClass("show");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
