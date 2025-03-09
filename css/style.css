@@ -1,1 +1,56 @@
-tes
+/* Variables */
+:root {
+    --kelinci-primary-color: #007bff;
+    --kelinci-secondary-color: #6c757d;
+    --kelinci-font-family: 'Arial', sans-serif;
+    --kelinci-spacing: 10px;
+}
+
+/* Grid System */
+.kelinci-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: calc(-1 * var(--kelinci-spacing));
+}
+.kelinci-col {
+    padding: var(--kelinci-spacing);
+    flex: 1;
+}
+
+/* Button Styles */
+.kelinci-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--kelinci-primary-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+.kelinci-button:hover {
+    background-color: #0056b3;
+}
+
+/* Card Styles */
+.kelinci-card {
+    border: 1px solid var(--kelinci-secondary-color);
+    padding: var(--kelinci-spacing);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Modal Styles */
+.kelinci-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+.kelinci-modal.show {
+    display: block;
+}
